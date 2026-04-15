@@ -28,8 +28,11 @@ async function main() {
 
   if (!liff.isLoggedIn()) {
     liff.login();
-    return; // 🔥 これ追加（重要）
+    return;
   }
+
+  console.log("ログイン完了");
+}
 }
 
 main();
