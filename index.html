@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>LIFFフォーム</title>
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-</head>
-<body>
-
-<h2>登録フォーム</h2>
-
-<form id="form">
-  名前：<input type="text" id="name"><br><br>
-  メール：<input type="email" id="email"><br><br>
-  <button type="submit">送信</button>
-</form>
-
 <script>
 const LIFF_ID = "2009806222-LGosT3pY";
 
@@ -39,7 +22,6 @@ main();
 document.getElementById("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // 🔥 念のためログインチェック
   if (!liff.isLoggedIn()) {
     alert("ログインしてください");
     return;
@@ -62,6 +44,3 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   alert("送信完了！");
 });
 </script>
-
-</body>
-</html>
