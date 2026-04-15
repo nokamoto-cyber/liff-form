@@ -56,14 +56,28 @@ document.getElementById("form").addEventListener("submit", async (e) => {
       name: document.getElementById("name").value,
       email: document.getElementById("email").value
     };
+const form = document.createElement("form");
+form.method = "POST";
+form.action = "https://script.google.com/macros/s/AKfycbxDM7-W4R93IF2F-X7p8C5M2uh7mpBBnCPQVSvVmZ1sOlzyXgQJE566JWkqJBJrwaZR/exec";
 
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxDM7-W4R93IF2F-X7p8C5M2uh7mpBBnCPQVSvVmZ1sOlzyXgQJE566JWkqJBJrwaZR/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
-    });
+const userIdInput = document.createElement("input");
+userIdInput.name = "userId";
+userIdInput.value = profile.userId;
+form.appendChild(userIdInput);
 
-    alert("送信完了！");
+const nameInput = document.createElement("input");
+nameInput.name = "name";
+nameInput.value = document.getElementById("name").value;
+form.appendChild(nameInput);
+
+const emailInput = document.createElement("input");
+emailInput.name = "email";
+emailInput.value = document.getElementById("email").value;
+form.appendChild(emailInput);
+
+document.body.appendChild(form);
+form.submit();
+
   } catch (err) {
     alert("エラー: " + err);
   }
