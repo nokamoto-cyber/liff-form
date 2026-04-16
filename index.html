@@ -54,6 +54,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
 const form = document.createElement("form");
 form.method = "POST";
 form.action = "https://script.google.com/macros/s/AKfycbxDM7-W4R93IF2F-X7p8C5M2uh7mpBBnCPQVSvVmZ1sOlzyXgQJE566JWkqJBJrwaZR/exec";
+form.enctype = "application/x-www-form-urlencoded";
 
 const userIdInput = document.createElement("input");
 userIdInput.type = "hidden"; // 🔥これ重要
