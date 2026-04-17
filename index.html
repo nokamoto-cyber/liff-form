@@ -2,39 +2,93 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>LIFFフォーム</title>
+  <title>登録フォーム</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 400px;
+      margin: 40px auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #06C755;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>登録フォーム</h2>
+<div class="card">
+  <h2>登録フォーム</h2>
 
-<form id="form">
-  名前：<input type="text" id="name"><br><br>
-  メール：<input type="email" id="email"><br><br>
-  <button type="submit">送信</button>
-</form>
+  <form id="form">
+    <label>名前</label>
+    <input type="text" id="name" required>
+
+    <label>メールアドレス</label>
+    <input type="email" id="email" required>
+
+    <button type="submit">送信する</button>
+  </form>
+</div>
 
 <script>
 const LIFF_ID = "2009806222-LGosT3pY";
 
 async function main() {
-  try {
-    await liff.init({ liffId: LIFF_ID });
+  await liff.init({ liffId: LIFF_ID });
 
-    if (!liff.isInClient()) {
-      document.body.innerHTML = "LINEから開いてください";
-      return;
-    }
+  if (!liff.isInClient()) {
+    document.body.innerHTML = "LINEから開いてください";
+    return;
+  }
 
-    if (!liff.isLoggedIn()) {
-      liff.login();
-      return;
-    }
-
-    console.log("ログインOK");
-  } catch (err) {
-    document.body.innerHTML = "エラー: " + err;
+  if (!liff.isLoggedIn()) {
+    liff.login();
+    return;
   }
 }
 
@@ -43,42 +97,36 @@ main();
 document.getElementById("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  try {
-    if (!liff.isLoggedIn()) {
-      alert("ログインしてください");
-      return;
-    }
+  const profile = await liff.getProfile();
 
-    const profile = await liff.getProfile();
-    
-const form = document.createElement("form");
-form.method = "POST";
-form.action = "https://script.google.com/macros/s/AKfycbxDM7-W4R93IF2F-X7p8C5M2uh7mpBBnCPQVSvVmZ1sOlzyXgQJE566JWkqJBJrwaZR/exec";
-form.enctype = "application/x-www-form-urlencoded";
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = "あなたのGASのURL";
+  form.enctype = "application/x-www-form-urlencoded";
 
-const userIdInput = document.createElement("input");
-userIdInput.type = "hidden"; // 🔥これ重要
-userIdInput.name = "userId";
-userIdInput.value = profile.userId;
-form.appendChild(userIdInput);
+  const userIdInput = document.createElement("input");
+  userIdInput.type = "hidden";
+  userIdInput.name = "userId";
+  userIdInput.value = profile.userId;
+  form.appendChild(userIdInput);
 
-const nameInput = document.createElement("input");
-nameInput.type = "hidden"; // 🔥これ重要
-nameInput.name = "name";
-nameInput.value = document.getElementById("name").value;
-form.appendChild(nameInput);
+  const nameInput = document.createElement("input");
+  nameInput.type = "hidden";
+  nameInput.name = "name";
+  nameInput.value = document.getElementById("name").value;
+  form.appendChild(nameInput);
 
-const emailInput = document.createElement("input");
-emailInput.type = "hidden"; // 🔥これ重要
-emailInput.name = "email";
-emailInput.value = document.getElementById("email").value;
-form.appendChild(emailInput);
+  const emailInput = document.createElement("input");
+  emailInput.type = "hidden";
+  emailInput.name = "email";
+  emailInput.value = document.getElementById("email").value;
+  form.appendChild(emailInput);
 
-document.body.appendChild(form);
-form.submit();
-  } catch (err) {
-    alert("エラー: " + err);
-  }
+  document.body.appendChild(form);
+
+  setTimeout(() => {
+    form.submit();
+  }, 200);
 });
 </script>
 
