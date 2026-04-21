@@ -6,56 +6,12 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 400px;
-      margin: 40px auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    label {
-      font-size: 14px;
-      color: #555;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #06C755;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
+    body { font-family: Arial, sans-serif; background: #f5f7fa; margin: 0; padding: 20px; }
+    .card { background: #fff; border-radius: 12px; padding: 20px; max-width: 400px; margin: 40px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    h2 { text-align: center; margin-bottom: 20px; }
+    label { font-size: 14px; color: #555; }
+    input { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+    button { width: 100%; padding: 12px; background: #06C755; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; }
   </style>
 </head>
 
@@ -91,7 +47,6 @@ async function main() {
     return;
   }
 }
-
 main();
 
 document.getElementById("form").addEventListener("submit", async (e) => {
@@ -105,31 +60,6 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     + "&email=" + encodeURIComponent(document.getElementById("email").value);
 
   window.location.href = url;
-});
-
-  const userIdInput = document.createElement("input");
-  userIdInput.type = "hidden";
-  userIdInput.name = "userId";
-  userIdInput.value = profile.userId;
-  form.appendChild(userIdInput);
-
-  const nameInput = document.createElement("input");
-  nameInput.type = "hidden";
-  nameInput.name = "name";
-  nameInput.value = document.getElementById("name").value;
-  form.appendChild(nameInput);
-
-  const emailInput = document.createElement("input");
-  emailInput.type = "hidden";
-  emailInput.name = "email";
-  emailInput.value = document.getElementById("email").value;
-  form.appendChild(emailInput);
-
-  document.body.appendChild(form);
-
-  setTimeout(() => {
-    form.submit();
-  }, 200);
 });
 </script>
 
