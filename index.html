@@ -99,10 +99,13 @@ document.getElementById("form").addEventListener("submit", async (e) => {
 
   const profile = await liff.getProfile();
 
-  const form = document.createElement("form");
-  form.method = "POST";
-  form.action = "あなたのGASのURL";
-  form.enctype = "application/x-www-form-urlencoded";
+  const url = "https://script.google.com/macros/s/AKfycbxDM7-W4R93IF2F-X7p8C5M2uh7XXXXXXXXX/exec"
+    + "?userId=" + profile.userId
+    + "&name=" + encodeURIComponent(document.getElementById("name").value)
+    + "&email=" + encodeURIComponent(document.getElementById("email").value);
+
+  window.location.href = url;
+});
 
   const userIdInput = document.createElement("input");
   userIdInput.type = "hidden";
